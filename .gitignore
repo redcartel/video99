@@ -1,0 +1,5 @@
+IGNOREME.md
+**/node_modules
+build/**
+#**/env.*
+**/*.template!
