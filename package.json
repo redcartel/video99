@@ -1,0 +1,17 @@
+{
+  "name": "video99",
+  "version": "1.0.0",
+  "description": "Create & rent videos for 99 cents each!",
+  "main": "index.js",
+  "repository": "git@github.com:redcartel/video99.git",
+  "author": "Carter Adams <carteradams@protonmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "shared/*",
+    "web/*",
+    "admin/*",
+    "mobile/*",
+    "aws/*"
+  ]
+}
