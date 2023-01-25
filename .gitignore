@@ -1,5 +1,5 @@
 IGNOREME.md
 **/node_modules
 build/**
-#**/env.*
+**/env.*
 **/*.template!
