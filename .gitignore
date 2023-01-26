@@ -1,8 +1,14 @@
 IGNOREME.md
 node_modules
 build/**
-env.*
-*.template!
+.env.production
+.env.staging
+.env.test
+.env.production.local
+.env.staging.local
+.env.test.local
+.env.local
+.env
 build/**
 dist/**
 .next/**
