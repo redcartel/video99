@@ -1,14 +1,9 @@
-// Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import { getAuth } from "firebase/auth";
-// import { getAnalytics } from "firebase/analytics";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
+export * as FS from "firebase/firestore";
+export * as Auth from "firebase/auth";
 
 export const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FBapiKey,
@@ -20,14 +15,13 @@ export const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FBmeasurementId
 };
 
-export const firebaseAdminConfig = {
-    projectId: process.env.NEXT_PUBLIC_FBprojectId,
-    clientEmail: process.env.PRIVATE_FBclientEmail,
-    privateKey: process.env.PRIVATE_FBprivateKey
-}
+const firebase = initializeApp(firebaseConfig);
 
-console.log(firebaseAdminConfig);
+export const auth = getAuth(firebase);
+export const firestore = getFirestore(firebase);
+export const analytics = typeof window === 'undefined' ? undefined : getAnalytics(firebase);
 
+export default firebase;
 
 // console.log(firebaseConfig);
 
