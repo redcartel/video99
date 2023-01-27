@@ -19,13 +19,13 @@ export default function adminApiWrapper(handler: (req: NextApiRequest, res: Next
         if (process.env.NODE_ENV === 'test' && req.headers.authorization === 'test') {
             return await handler(req, res);
         }
-        const user = await adminAuth.verifyIdToken(req.headers.authorization);
+        const user = await adminAuth?.verifyIdToken(req.headers.authorization);
         if (!user?.email) {
             return res.status(401).json({ error: 'unauthorized' });
         }
         // // Requires that a firestore document for the user exist in superAdmins collection
-        const doc = await adminFirestore.doc(`/superAdmins/${user.email}`).get();
-        if (!doc.exists || !doc?.data()?.isSuperAdmin) {
+        const doc = await adminFirestore?.doc(`/superAdmins/${user.email}`).get();
+        if (!doc?.exists || !doc.data()?.isSuperAdmin) {
             return res.status(401).json({ error: 'insufficient privileges' });
         }
         return await handler(req, res);
