@@ -1,9 +1,6 @@
-import useAdminUser from 'hooks_etc/useAdminUser';
+import useAdminUser from '@/hooks_etc/useAdminUser';
 import React from 'react';
-import firebase from 'util/firebase';
-import { getAuth } from 'firebase/auth';
-
-const auth = getAuth(firebase);
+import firebase, { auth } from '@shared/util/firebase';
 
 export default function AdminIndex() {
     const superAdmin = useAdminUser();

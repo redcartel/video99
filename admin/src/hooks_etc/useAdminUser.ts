@@ -1,11 +1,6 @@
-import { getAuth, User } from 'firebase/auth';
-import * as FS from 'firebase/firestore';
-
 import React from 'react'
-import firebase from 'util/firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import firebase, { auth, FS, Auth } from '@shared/util/firebase';
 
-const auth = getAuth(firebase);
 const firestore = FS.getFirestore(firebase);
 
 /**
@@ -18,10 +13,11 @@ const firestore = FS.getFirestore(firebase);
  * 
  * @returns User | null | undefined
  */
-export default function useAdminUser(redirect: boolean = true): User | null | undefined {
-    const [user, setUser] = React.useState<User | null | undefined>(undefined);
-    onAuthStateChanged(auth, (user) => {
+export default function useAdminUser(redirect: boolean = true): Auth.User | null | undefined {
+    const [user, setUser] = React.useState<Auth.User | null | undefined>(undefined);
+    Auth.onAuthStateChanged(auth, (user) => {
         if (user?.email) {
+            console.log(typeof FS.doc(firestore, '/superAdmins/ok'))
             FS.getDoc(FS.doc(firestore, `/superAdmins/${user.email}`)).then(snapshot => {
                 if (snapshot?.data()?.isSuperAdmin) {
                     setUser(user);

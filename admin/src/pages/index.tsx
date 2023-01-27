@@ -1,19 +1,13 @@
 import Head from 'next/head'
-import { getAuth, GoogleAuthProvider, signInWithPopup, User } from 'firebase/auth';
 import React, { useEffect } from 'react';
-import { getAnalytics } from "firebase/analytics";
 import axios, { AxiosError } from 'axios';
-import firebase from 'util/firebase';
-
-const analytics = (typeof window !== 'undefined') ? getAnalytics(firebase) : undefined;
-
-const auth = getAuth(firebase);
+import firebase, { auth, Auth } from '@shared/util/firebase';
 
 export default function Home() {
   // console.log(auth.config);
   const [message, setMessage] = React.useState('Welcome');
-  const [user, setUser] = React.useState<User | null>(null);
-  const provider = React.useMemo(() => new GoogleAuthProvider(), []);
+  const [user, setUser] = React.useState<Auth.User | null>(null);
+  const provider = React.useMemo(() => new Auth.GoogleAuthProvider(), []);
 
   React.useEffect(() => {
     console.log('attempting fetch...');
@@ -49,7 +43,7 @@ export default function Home() {
         </div>
         <button
           onClick={e => {
-            signInWithPopup(auth, provider)
+            Auth.signInWithPopup(auth, provider)
               .then((result) => {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 //const user = result.user;

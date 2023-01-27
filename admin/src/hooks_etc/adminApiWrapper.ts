@@ -1,11 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getAuth } from "firebase-admin/auth";
-import { getFirestore } from "firebase-admin/firestore";
-import firebaseAdmin from "util/firebaseAdmin";
-
-const auth = getAuth(firebaseAdmin);
-const firestore = getFirestore(firebaseAdmin);
-
+import firebaseAdmin, { adminAuth, adminFirestore } from "@shared/util/firebaseAdmin";
 
 /**
  * @param handler
@@ -25,12 +19,12 @@ export default function adminApiWrapper(handler: (req: NextApiRequest, res: Next
         if (process.env.NODE_ENV === 'test' && req.headers.authorization === 'test') {
             return await handler(req, res);
         }
-        const user = await auth.verifyIdToken(req.headers.authorization);
+        const user = await adminAuth.verifyIdToken(req.headers.authorization);
         if (!user?.email) {
             return res.status(401).json({ error: 'unauthorized' });
         }
         // // Requires that a firestore document for the user exist in superAdmins collection
-        const doc = await firestore.doc(`/superAdmins/${user.email}`).get();
+        const doc = await adminFirestore.doc(`/superAdmins/${user.email}`).get();
         if (!doc.exists || !doc?.data()?.isSuperAdmin) {
             return res.status(401).json({ error: 'insufficient privileges' });
         }
