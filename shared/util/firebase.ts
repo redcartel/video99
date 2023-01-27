@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getAuth } from "firebase/auth";
+// import { getAnalytics } from "firebase/analytics";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -10,7 +10,7 @@ import { getAnalytics } from "firebase/analytics";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
 
-const firebaseConfig = {
+export const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FBapiKey,
     authDomain: process.env.NEXT_PUBLIC_FBauthDomain,
     projectId: process.env.NEXT_PUBLIC_FBprojectId,
@@ -20,9 +20,18 @@ const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_FBmeasurementId
 };
 
-console.log(firebaseConfig);
+export const firebaseAdminConfig = {
+    projectId: process.env.NEXT_PUBLIC_FBprojectId,
+    clientEmail: process.env.PRIVATE_FBclientEmail,
+    privateKey: process.env.PRIVATE_FBprivateKey
+}
+
+console.log(firebaseAdminConfig);
+
+
+// console.log(firebaseConfig);
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const analytics = (app.name && typeof window !== 'undefined') ? getAnalytics(app) : undefined;
+// export const app = initializeApp(firebaseConfig);
+// export const auth = getAuth(app);
+// export const analytics = (app.name && typeof window !== 'undefined') ? getAnalytics(app) : undefined;
