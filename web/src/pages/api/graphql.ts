@@ -23,13 +23,12 @@ const uri = process.env.PRIVATE_MONGOuri!;
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.setHeader("Access-Control-Allow-Origin", "https://studio.apollographql.com");
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     if (req.method === "OPTIONS") {
         res.end();
         return false;
     }
-    console.log(uri);
     const client = new MongoClient(uri, { serverApi: ServerApiVersion.v1 });
     try {
         await client.connect();
