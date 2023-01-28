@@ -1,5 +1,5 @@
 import { registerRootComponent } from 'expo';
-
+/*require('dotenv').config({ path: '../.env.local' })*/
 import App from './App';
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);

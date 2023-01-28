@@ -1,9 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, initializeAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+import Analytics, { getAnalytics } from "firebase/analytics";
 export * as FS from "firebase/firestore";
 export * as Auth from "firebase/auth";
+
+//console.log(process.env.NEXT_PUBLIC_FBapiKey)
 
 export const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FBapiKey,
@@ -17,9 +19,11 @@ export const firebaseConfig = {
 
 const firebase = initializeApp(firebaseConfig);
 
-export const auth = getAuth(firebase);
+//export const auth = getAuth(firebase);
+export const auth = initializeAuth(firebase)
 export const firestore = getFirestore(firebase);
-export const analytics = typeof window === 'undefined' ? undefined : getAnalytics(firebase);
+//export const analytics = (typeof window === 'undefined' || !(Analytics.isSupported())) ? undefined : getAnalytics(firebase);
+export const analyticsPromise = Analytics?.isSupported().then(answer => answer ? getAnalytics(firebase) : undefined);
 
 export default firebase;
 
