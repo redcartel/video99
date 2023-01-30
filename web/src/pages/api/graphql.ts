@@ -6,7 +6,7 @@ import { makeServer } from "@/graphql";
 const cors = Cors();
 const apolloServer = makeServer();
 
-export default cors(async (req: NextApiRequest, res: NextApiResponse) => {
+export default cors((async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === "OPTIONS") {
         res.end();
         return false;
@@ -28,7 +28,7 @@ export default cors(async (req: NextApiRequest, res: NextApiResponse) => {
     await apolloServer.createHandler({
         path: "/api/graphql",
     })(req, res);
-});
+}) as any);
 
 
 export const config = {
