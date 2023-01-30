@@ -36,7 +36,7 @@ export default createJestConfig({
     '@/(.*)$': '<rootDir>/src/$1',
     '@shared(.*)$': '../shared/$1'
   },
-  testEnvironment: 'jest-environment-jsdom',
+  //testEnvironment: 'jest-environment-jsdom',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [

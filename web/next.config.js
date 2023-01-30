@@ -3,7 +3,7 @@
 require('dotenv-mono').load();
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: true
 }
 
 module.exports = nextConfig
